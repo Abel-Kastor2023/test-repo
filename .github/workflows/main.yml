@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Install SSH keys
         run: |
-          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
@@ -17,7 +16,7 @@ jobs:
       - name: Test Commands
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-           "echo 'Third Deployment Successful' > /home/ec2-user/test-repo/hello.txt"
+           "echo 'Fourth Deployment Successful' > /home/ec2-user/test-repo/hello.txt"
       - name: cleanup
         run: rm -rf ~/.ssh
       
